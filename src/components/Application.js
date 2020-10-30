@@ -9,56 +9,6 @@ import {
   getInterview,
   getInterviewersForDay,
 } from "helpers/selectors";
-// const appointments = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       },
-//     },
-//   },
-//   {
-//     id: 3,
-//     time: "2pm",
-//     interview: {
-//       student: "Kourtney Huget",
-//       interviewer: {
-//         id: 2,
-//         name: "Ralph Lauren",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       },
-//     },
-//   },
-//   {
-//     id: 4,
-//     time: "3pm",
-//   },
-//   {
-//     id: 5,
-//     time: "4pm",
-//     interview: {
-//       student: "Paige Lindahl",
-//       interviewer: {
-//         id: 3,
-//         name: "Tommy Hilfiger",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       },
-//     },
-//   },
-//   {
-//     id: 6,
-//     time: "5pm",
-//   },
-// ];
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -70,6 +20,24 @@ export default function Application(props) {
 
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
+
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios.put(`/api/appointments/${id}`, appointment).then(() => {
+      setState({
+        ...state,
+        appointments,
+      });
+    });
+  }
 
   const setDay = (day) => setState({ ...state, day });
   // const setDays = (days) => setState((prev) => ({ ...prev, days }));
@@ -118,6 +86,7 @@ export default function Application(props) {
               time={appointment.time}
               interview={interview}
               interviewers={interviewers}
+              bookInterview={bookInterview}
             />
           );
         })}
