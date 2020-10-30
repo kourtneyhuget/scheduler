@@ -10,6 +10,7 @@ const state = {
       id: 1,
       name: "Monday",
       appointments: [1, 2, 3],
+      interviewers: [1, 2],
     },
     {
       id: 2,
@@ -42,11 +43,6 @@ const state = {
       id: 2,
       name: "Tori Malcolm",
       avatar: "https://i.imgur.com/Nmx0Qxo.png",
-    },
-  },
-  interviewersAvailable: {
-    Monday: {
-      interviewers: [1, 2],
     },
   },
 };
