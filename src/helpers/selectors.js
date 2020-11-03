@@ -1,10 +1,8 @@
 export function getAppointmentsForDay(state, day) {
   const filteredDays = state.days.find((dayObj) => dayObj.name === day);
-  console.log(filteredDays);
   const apptArray = [];
 
   if (state.appointments && filteredDays) {
-    console.log(state.appointments);
     filteredDays.appointments.forEach((appId) =>
       apptArray.push(state.appointments[appId])
     );
@@ -33,7 +31,6 @@ export function getInterview(state, interview) {
 
 export function getInterviewersForDay(state, day) {
   const filteredDays = state.days.filter((dayObj) => dayObj.name === day);
-  console.log(filteredDays);
   const intArray = [];
 
   if (filteredDays) {
