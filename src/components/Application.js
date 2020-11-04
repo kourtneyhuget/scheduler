@@ -12,6 +12,7 @@ import {
 } from "helpers/selectors";
 
 export default function Application(props) {
+  // import objects from custom hooks in useApplicationData
   const {
     state,
     setDay,
@@ -19,6 +20,7 @@ export default function Application(props) {
     cancelInterview,
   } = useApplicationData();
 
+  // calling helper functions
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 

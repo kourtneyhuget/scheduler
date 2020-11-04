@@ -1,6 +1,5 @@
 import { useState } from "react";
 // building our own history (so that we can go backwards in a moment in time)
-// mode will be the last thing in the array
 export default function useVisualMode(initial) {
   // start an initial state
   const [state, setState] = useState([initial]);
@@ -18,7 +17,7 @@ export default function useVisualMode(initial) {
     setState(newState);
   }
   // single array
-  // checking length to make sure there is nothing to go back to ( 1 or 0 entries there is nothing to go back to)
+  // checking length to make sure there is nothing to go back to ( if 1 or 0 entries there is nothing to go back to)
   const back = function () {
     if (state.length < 2) {
       return;
@@ -33,6 +32,3 @@ export default function useVisualMode(initial) {
   // returning the mode (current state) and two functions
   return { mode, transition, back };
 }
-
-// rendering => what react does. We rendered an HTML page.
-// painting => once we have rendered it. React displays it for the users. The HTML and the CSS.

@@ -7,6 +7,8 @@ export default function useApplicationData(props) {
     appointments: {},
     interviewers: {},
   });
+
+  // calls to server
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -21,13 +23,14 @@ export default function useApplicationData(props) {
       }));
     });
   }, []);
+
   const setDay = (day) => setState({ ...state, day });
+
+  // function to update state when updating spots remaining
   const updateSpots = (day, days, appointments) => {
     const dayIndex = days.findIndex((d) => d.name === day);
     const dayObj = days[dayIndex];
-    // console.log('dayObj :', dayObj);
     const appointmentIDs = dayObj.appointments;
-    // console.log('appointmentIDs :', appointmentIDs);
     let spots = 0;
     for (const id of appointmentIDs) {
       let appointment = appointments[id];
@@ -38,11 +41,11 @@ export default function useApplicationData(props) {
     let newDayObj = { ...dayObj, spots };
     let newDaysArray = [...days];
     newDaysArray[dayIndex] = newDayObj;
-    // dayObj.spots = spots;
     return newDaysArray;
   };
+
+  // function to update state when booking an interview
   const bookInterview = (id, interview) => {
-    // console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -56,6 +59,8 @@ export default function useApplicationData(props) {
       setState({ ...state, appointments, days: newDays });
     });
   };
+
+  // function to update state when cancelling an interview
   const cancelInterview = (id) => {
     const appointment = {
       ...state.appointments[id],

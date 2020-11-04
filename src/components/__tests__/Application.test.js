@@ -6,7 +6,6 @@ import {
   cleanup,
   waitForElement,
   getByText,
-  prettyDOM,
   fireEvent,
   getAllByTestId,
   getByPlaceholderText,
@@ -17,7 +16,6 @@ import {
 } from "@testing-library/react";
 
 import Application from "components/Application";
-// import { fireEvent } from "@testing-library/react/dist";
 
 afterEach(cleanup);
 
@@ -33,7 +31,7 @@ describe("Application", () => {
   });
 
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -61,7 +59,7 @@ describe("Application", () => {
   });
 
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
     await waitForElement(() => getByText(container, "Archie Cohen"));
@@ -93,14 +91,12 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-    // debug();
   });
 
   it("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
-    console.log("container", prettyDOM(container));
 
     const appointment = getAllByTestId(
       container,
@@ -128,13 +124,11 @@ describe("Application", () => {
     );
 
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
-    // debug();
   });
 
   it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
-    // Uncomment debug() at the bottom of this test for testing
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -162,13 +156,11 @@ describe("Application", () => {
     expect(
       getByText(appointment, "There was an error saving your appointment")
     ).toBeInTheDocument();
-
-    // debug();
   });
 
   it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
@@ -190,7 +182,5 @@ describe("Application", () => {
     expect(
       getByText(appointment, "There was an error deleting your appointment")
     ).toBeInTheDocument();
-
-    // debug();
   });
 });
