@@ -18,10 +18,8 @@ import {
 
 import Application from "components/Application";
 // import { fireEvent } from "@testing-library/react/dist";
-afterEach(() => {
-  jest.restoreAllMocks();
-  cleanup();
-});
+
+afterEach(cleanup);
 
 describe("Application", () => {
   it("changes the schedule when a new day is selected", async () => {
@@ -62,7 +60,7 @@ describe("Application", () => {
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
 
-  xit("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application />);
 
     // 2. Wait until the text "Archie Cohen" is displayed.
@@ -170,7 +168,6 @@ describe("Application", () => {
 
   it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
-    // Uncomment debug() at the bottom of this test for testing
     const { container, debug } = render(<Application />);
 
     await waitForElement(() => getByText(container, "Archie Cohen"));
