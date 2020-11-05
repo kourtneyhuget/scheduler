@@ -1,5 +1,9 @@
 # Interview Scheduler
 
+## Screenshots
+
+![demo of scheduler](https://github.com/kourtneyhuget/scheduler/blob/master/docs/Animated%20GIF-downsized_large.gif)
+
 ## Setup
 
 Install dependencies with `npm install`.
