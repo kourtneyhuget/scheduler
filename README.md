@@ -1,8 +1,15 @@
 # Interview Scheduler
 
+## Description
+
+Scheduler is a single-page application built with React. PostgreSQL
+
 ## Screenshots
 
 ![demo of scheduler](https://github.com/kourtneyhuget/scheduler/blob/master/docs/Animated%20GIF-downsized_large.gif)
+![screenshot main page](https://github.com/kourtneyhuget/scheduler/blob/master/docs/Scheduler-screenshot.png)
+![screenshot add appointment](https://github.com/kourtneyhuget/scheduler/blob/master/docs/Scheduler1-screenshot.png)
+![screenshot delete](https://github.com/kourtneyhuget/scheduler/blob/master/docs/SchedulerDelete%20-%20screenshot.png)
 
 ## Setup
 
