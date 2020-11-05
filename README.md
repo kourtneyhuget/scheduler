@@ -2,7 +2,7 @@
 
 ## Description
 
-Scheduler is a single-page application built with React. PostgreSQL
+Scheduler is a single-page application built with React. PostgreSQL is used as the database. Jest, Cypress and Storybook were all used throughout the development process.
 
 ## Screenshots
 
